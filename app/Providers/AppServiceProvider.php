@@ -7,6 +7,8 @@ use App\Repository\CustomPostTypeInterface;
 use App\Repository\CustomPostTypeRepository;
 use App\Repository\EntityInterface;
 use App\Repository\EntityRepository;
+use App\Repository\StoreInterface;
+use App\Repository\StoreRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(CustomPostTypeInterface::class,CustomPostTypeRepository::class);
         $this->app->bind(EntityInterface::class,EntityRepository::class);
+        $this->app->bind(StoreInterface::class,StoreRepository::class);
     }
 
     /**

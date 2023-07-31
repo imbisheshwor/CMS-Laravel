@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CustomPostTypeController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\StoreController;
+use App\Models\Entity;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,7 @@ Route::get('/', function () {
     return view('dashboard/index');
 });
 
-Route::resource('customPostType',CustomPostTypeController::class);
+Route::resource('customPostType', CustomPostTypeController::class);
 
 
 // Route::get('customPostType',[CustomPostTypeController::class,'create'])->name('customPostType.careate');
@@ -31,8 +33,13 @@ Route::resource('customPostType',CustomPostTypeController::class);
 // Route::delete('customPostType/{id}',[CustomPostTypeController::class,'destroy'])->name('customPostType.destroy');
 
 // Route::resource('Entity',EntityControer::class);
-Route::get('entity/{entity}/add',[EntityController::class,'create'])->name('entity.create');
-Route::post('entity/store',[EntityController::class,'store'])->name('entity.store');
-Route::get('entity/{id}/edit',[EntityController::class,'edit'])->name('entity.edit');
-Route::post('entity/update',[EntityController::class,'update'])->name('entity.update');
-Route::delete('entity/{id}/delete',[EntityController::class,'destroy'])->name('entity.destroy');
+Route::get('entity/{entity}/add', [EntityController::class, 'create'])->name('entity.create');
+Route::post('entity/store', [EntityController::class, 'store'])->name('entity.store');
+Route::get('entity/{id}/edit', [EntityController::class, 'edit'])->name('entity.edit');
+Route::post('entity/update', [EntityController::class, 'update'])->name('entity.update');
+Route::delete('entity/{id}/delete', [EntityController::class, 'destroy'])->name('entity.destroy');
+
+
+Route::get('store/{custom_post_type_slug}/index', [StoreController::class, 'index'])->name('store.index');
+Route::get('store/{custom_post_type_slug}/add', [StoreController::class, 'create'])->name('store.create');
+Route::post('store/{custom_post_type_slug}/store', [StoreController::class, 'store'])->name('store.store');
