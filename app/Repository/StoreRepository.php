@@ -5,6 +5,7 @@ namespace app\Repository;
 use App\Repository\StoreInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Store;
+use Carbon\Carbon;
 
 class StoreRepository implements StoreInterface
 {
@@ -23,7 +24,9 @@ class StoreRepository implements StoreInterface
     public function storeOrUpdate($id = null, $data = [])
     {
 
-    $old_id = (int) (Store::latest()->first()->key ?? 0);
+    // $old_id =(Store::latest()->first()->key ?? 0);
+    $old_id =(Store::latest()->first()->key ?? 0);
+    // dd($old_id);
 
         if (is_null($id)) {
             $inputArray = [];
@@ -32,7 +35,9 @@ class StoreRepository implements StoreInterface
                     'value' => $value,
                     'entity_id' => $entity_id,
                     'custom_post_type_id' => $data['cpt_id'],
-                    'key' =>  $old_id + 1
+                    'key' =>  $old_id + 1,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
                 ]);
             }
 

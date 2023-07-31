@@ -32,21 +32,18 @@ class StoreController extends Controller
         $cpt_id = $cpt->id;
         $entity = $this->entity->findWhere(['custom_post_type_id'=>$cpt_id])->get();
 
-        return view('dashboard.dynamic.add',compact('cpt_id','cpt','entity'));
+        return view('dashboard.dynamic.add',compact('slug','cpt_id','cpt','entity'));
     }
 
-    public function store(Request $request,$id){
-
-      
+    public function store(Request $request,$slug){
+       
         $data = $request->all();
-        
-
         $this->store->storeOrUpdate($id=null,$data);
 
-        // return redirect()->route('customPostType.show',$request->cpt_id) ->with([   
-        //     'message' => "Custom Post Added Successfully",
-        //     'status' => "success",
-        // ]);
+        return redirect()->route('store.index',$slug) ->with([   
+            'message' => "Custom Post Added Successfully",
+            'status' => "success",
+        ]);
        
     }
 

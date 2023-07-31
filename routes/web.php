@@ -40,6 +40,6 @@ Route::post('entity/update', [EntityController::class, 'update'])->name('entity.
 Route::delete('entity/{id}/delete', [EntityController::class, 'destroy'])->name('entity.destroy');
 
 
-Route::get('store/{custom_post_type_slug}/index', [StoreController::class, 'index'])->name('store.index');
-Route::get('store/{custom_post_type_slug}/add', [StoreController::class, 'create'])->name('store.create');
-Route::post('store/{custom_post_type_slug}/store', [StoreController::class, 'store'])->name('store.store');
+Route::get('admin/{custom_post_type_slug}/index', [StoreController::class, 'index'])->name('store.index');
+Route::get('admin/{custom_post_type_slug}/add', [StoreController::class, 'create'])->name('store.create');
+Route::post('admin/{custom_post_type_slug}/store', [StoreController::class, 'store'])->name('store.store');

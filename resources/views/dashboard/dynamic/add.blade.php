@@ -17,7 +17,7 @@
                         <div class="p-0 overflow-x-auto mt-10 pl-10">
 
 
-                            <form action="{{ route('store.store',$cpt_id) }}" method="POST">
+                            <form action="{{ route('store.store',$slug) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="cpt_id" value="{{ $cpt_id }}">
                                 @foreach ($entity as $item)
