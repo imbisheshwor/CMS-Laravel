@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\CustomPostType;
 use Illuminate\Support\ServiceProvider;
 use App\Repository\CustomPostTypeInterface;
 use App\Repository\CustomPostTypeRepository;
@@ -9,6 +10,7 @@ use App\Repository\EntityInterface;
 use App\Repository\EntityRepository;
 use App\Repository\StoreInterface;
 use App\Repository\StoreRepository;
+use Facade\FlareClient\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function ($view) {
+            $sideBar = CustomPostType::all();
+            $view->with('sideBar',$sideBar);
+
+        });
     }
 }
