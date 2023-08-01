@@ -25,97 +25,56 @@
                                             class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                             S.N</th>
                                         @foreach ($entity as $item)
-                                            
-                                        <th
-                                        class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            {{$item->name}}</th>
-                                            
-                                            @endforeach
-                                        {{-- <th
-                                            class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            S.N</th>
-                                        <th
-                                            class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            name</th>
-                                        <th
-                                            class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            Slug</th>
-                                        <th
-                                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            Status</th>
-                                        <th
-                                            class="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            type</th>
-
+                                            <th
+                                                class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                                {{ $item->name }}</th>
+                                        @endforeach
 
                                         <th
-                                            class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                        </th> --}}
+                                            class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                            Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $item)
+                                    @foreach ($data as $key => $item)
                                         <tr>
                                             <td
                                                 class="p-2 align-middle bg-transparent border-b  whitespace-nowrap shadow-transparent">
                                                 <span
                                                     class="text-xs font-semibold leading-tight text-slate-400 ">{{ $loop->iteration }}</span>
                                             </td>
-                                            
+
                                             @foreach ($item as $i)
-                                             <td
-                                             
-                                                 
-                                             class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                             <div class="flex px-2 py-1">
-                                                 
-                                                 
-                                                    <div class="flex flex-col justify-center">
-                                                        <h6 class="mb-0 text-sm leading-normal">{{ $i->value }}</h6>
+                                                <td
+                                                    class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                    <div class="flex px-2 py-1">
+
+
+                                                        <div class="flex flex-col justify-center">
+                                                            <h6 class="mb-0 text-sm leading-normal">{{ $i->value }}</h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
+                                                </td>
                                             @endforeach
 
-
-                                         {{--   <td
-                                                class="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <span
-                                                    class="text-xs font-semibold leading-tight text-slate-400">{{ $item->slug }}</span>
-                                            </td>
                                             <td
-                                                class="p-2 align-middle bg-transparent text-center border-b whitespace-nowrap shadow-transparent">
-                                                <span
-                                                    class="text-xs font-semibold leading-tight text-slate-400">{{ $item->type }}</span>
-                                            </td> --}}
-
-                                            {{-- <td
-                                                class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <a href="{{ route('entity.edit', $item->id) }}"><span
+                                                class="p-2 text-sm leading-normal text-left align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                <a
+                                                    href="{{ route('store.edit', ['custom_post_type_slug' => $cpt->slug, 'key' => $key]) }}"><span
                                                         class="bg-gradient-to-tl from-blue-600 to-gray-400 cursor-pointer px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">edit</span></a>
 
 
 
                                             </td>
-                                            <td
-                                                class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                                <form method="POST"
-                                                    action="{{ route('entity.destroy', $item->id) }}">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <input type="submit" value="Delete"
-                                                        onclick="confirm('Are you Sure want to delete?')"
-                                                        class="bg-gradient-to-tl from-green-600 to-lime-400 cursor-pointer px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-gray-900">
-                                                </form>
 
-                                            </td> --}}
+
                                         </tr>
+                                        
                                     @endforeach
                                 </tbody>
                             </table>
-                            <a href="{{ route('customPostType.index') }}" role="button" type="button"
-                                class="focus:outline-none bottom-0 mt-3 ml-4 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Custom
-                                Post Type List</a>
+
 
                         </div>
                     </div>

@@ -21,7 +21,7 @@ class StoreRepository implements StoreInterface
         return Store::find($id);
     }
 
-    public function storeOrUpdate($id = null, $data = [])
+    public function storeOrUpdate($id,$data)
     {
 
     // $old_id =(Store::latest()->first()->key ?? 0);
@@ -43,14 +43,11 @@ class StoreRepository implements StoreInterface
 
             $msg = Store::insert($inputArray);
             return $msg;
-           
+
         }
 
         $cpt = Store::find($id);
-        $cpt->name = $data['name'];
-        $cpt->slug = $data['slug'];
-
-        $cpt->save();
+        $cpt->update($data);
 
         return $cpt;
     }

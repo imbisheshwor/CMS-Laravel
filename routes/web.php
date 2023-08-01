@@ -43,3 +43,5 @@ Route::delete('entity/{id}/delete', [EntityController::class, 'destroy'])->name(
 Route::get('admin/{custom_post_type_slug}/index', [StoreController::class, 'index'])->name('store.index');
 Route::get('admin/{custom_post_type_slug}/add', [StoreController::class, 'create'])->name('store.create');
 Route::post('admin/{custom_post_type_slug}/store', [StoreController::class, 'store'])->name('store.store');
+Route::get('admin/{custom_post_type_slug}/edit/{key}', [StoreController::class,'edit'])->name('store.edit');
+Route::post('admin/{custom_post_type_slug}/update/{key}', [StoreController::class,'update'])->name('store.update');

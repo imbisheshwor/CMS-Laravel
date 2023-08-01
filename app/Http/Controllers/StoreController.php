@@ -36,17 +36,40 @@ class StoreController extends Controller
     }
 
     public function store(Request $request,$slug){
-       
+
         $data = $request->all();
         $this->store->storeOrUpdate($id=null,$data);
 
-        return redirect()->route('store.index',$slug) ->with([   
+        return redirect()->route('store.index',$slug) ->with([
             'message' => "Custom Post Added Successfully",
             'status' => "success",
         ]);
-       
+
     }
 
-    
-   
+    public function edit($slug,$key){
+        $cpt = $this->cpt->findWhere(['slug'=>$slug])->first();
+        $data = $this->store->findWhere(['key'=>$key,'custom_post_type_id'=>$cpt->id])->with('entity')->get();
+        return view('dashboard.dynamic.edit',compact('slug','cpt','data','key'));
+
+    }
+
+    function update(Request $request,$slug,$key) {
+
+        $cpt = $this->cpt->findWhere(['slug'=>$slug])->first();
+        foreach ($request->values as $id => $value) {
+
+            $this->store->storeOrUpdate($id,[
+                'value' => $value
+            ]);
+        }
+        $change = $this->store->findWhere(['id'=>$cpt->id,'key'=>$key]);
+
+        return redirect()->route('store.index',$slug);
+
+
+    }
+
+
+
 }
