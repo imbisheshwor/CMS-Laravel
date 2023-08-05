@@ -10,7 +10,7 @@
                     class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <div
                         class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent relative">
-                        <h6>Field of {{ $cpt->name }}</h6>
+                        <h6>Data of {{ $cpt->name }}</h6>
 
                         <a href="{{ route('store.create', $cpt->slug) }}" role="button" type="button"
                             class="focus:outline-none top-5 right-2 absolute text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</a>
@@ -65,12 +65,16 @@
                                                         class="bg-gradient-to-tl from-blue-600 to-gray-400 cursor-pointer px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">edit</span></a>
 
 
+                                                        <button onclick="confirm('Are you Sure want to delete?')" class="bg-gradient-to-tl from-red-600 to-orange-700 cursor-pointer px-2.5 text-xs rounded-1.8 py-1.4 inline-block whitespace-nowrap text-center align-baseline font-bold uppercase leading-none text-white">
+                                                            <a href="{{ route('store.delete', ['custom_post_type_slug' => $cpt->slug, 'key' => $key]) }}"><span>Delete</span></a></button>
+
+
 
                                             </td>
 
 
                                         </tr>
-                                        
+
                                     @endforeach
                                 </tbody>
                             </table>

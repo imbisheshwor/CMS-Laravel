@@ -57,6 +57,7 @@ class StoreRepository implements StoreInterface
         return Store::find($id)->delete();
     }
 
+
     public function findWhere($data = [])
     {
         $cpt = Store::select('*');

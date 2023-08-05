@@ -70,6 +70,17 @@ class StoreController extends Controller
 
     }
 
+    function delete(Request $request,$slug,$key) {
+
+        $cpt = $this->cpt->findWhere(['slug'=>$slug])->first();
+        $data = $this->store->findWhere(['key'=>$key,'custom_post_type_id'=>$cpt->id])->with('entity')->get();
+
+        foreach ($data as $item) {
+            $this->store->destroyById($item->id);
+        }
+        return redirect()->route('store.index',$slug);
+    }
+
 
 
 }
