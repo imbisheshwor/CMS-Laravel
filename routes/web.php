@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomPostTypeController;
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoreController;
 use App\Models\Entity;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +21,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('dashboard/index');
 });
+Route::prefix('front')->group(function (){
+    Route::get('sign-in',[HomeController::class,'sign_in'])->name('frontend.sing_in');
+    Route::get('sign-up',[HomeController::class,'sign_up'])->name('frontend.sing_up');
+});
+
 
 Route::resource('customPostType', CustomPostTypeController::class);
+
 
 
 // Route::get('customPostType',[CustomPostTypeController::class,'create'])->name('customPostType.careate');
@@ -46,4 +53,3 @@ Route::post('admin/{custom_post_type_slug}/store', [StoreController::class, 'sto
 Route::get('admin/{custom_post_type_slug}/edit/{key}', [StoreController::class,'edit'])->name('store.edit');
 Route::post('admin/{custom_post_type_slug}/update/{key}', [StoreController::class,'update'])->name('store.update');
 Route::get('admin/{custom_post_type_slug}/delete/{key}', [StoreController::class,'delete'])->name('store.delete');
-
