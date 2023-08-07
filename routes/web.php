@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StoreController;
 use App\Models\Entity;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,15 +21,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard/index');
+    return view('index');
 });
-Route::prefix('front')->group(function (){
-    Route::get('sign-in',[LoginController::class,'sign_in'])->name('frontend.sing_in');
-    Route::get('sign-up',[LoginController::class,'sign_up'])->name('frontend.sing_up');
+Route::prefix('front')->group(function () {
+    Route::get('sign-in', [LoginController::class, 'sign_in'])->name('frontend.sign_in');
+    Route::get('sign-up', [LoginController::class, 'sign_up'])->name('frontend.sign_up');
 });
 
 
-Route::resource('customPostType', CustomPostTypeController::class);
+
 
 
 
@@ -41,19 +42,37 @@ Route::resource('customPostType', CustomPostTypeController::class);
 // Route::delete('customPostType/{id}',[CustomPostTypeController::class,'destroy'])->name('customPostType.destroy');
 
 // Route::resource('Entity',EntityControer::class);
-Route::get('entity/{entity}/add', [EntityController::class, 'create'])->name('entity.create');
-Route::post('entity/store', [EntityController::class, 'store'])->name('entity.store');
-Route::get('entity/{id}/edit', [EntityController::class, 'edit'])->name('entity.edit');
-Route::post('entity/update', [EntityController::class, 'update'])->name('entity.update');
-Route::delete('entity/{id}/delete', [EntityController::class, 'destroy'])->name('entity.destroy');
 
 
-Route::get('admin/{custom_post_type_slug}/index', [StoreController::class, 'index'])->name('store.index');
-Route::get('admin/{custom_post_type_slug}/add', [StoreController::class, 'create'])->name('store.create');
-Route::post('admin/{custom_post_type_slug}/store', [StoreController::class, 'store'])->name('store.store');
-Route::get('admin/{custom_post_type_slug}/edit/{key}', [StoreController::class,'edit'])->name('store.edit');
-Route::post('admin/{custom_post_type_slug}/update/{key}', [StoreController::class,'update'])->name('store.update');
-Route::get('admin/{custom_post_type_slug}/delete/{key}', [StoreController::class,'delete'])->name('store.delete');Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+
+    Route::get('/', [StoreController::class, 'dashboard'])->name('dashboard');
+
+    Route::resource('customPostType', CustomPostTypeController::class);
+
+    Route::get('entity/{entity}/add', [EntityController::class, 'create'])->name('entity.create');
+    Route::post('entity/store', [EntityController::class, 'store'])->name('entity.store');
+    Route::get('entity/{id}/edit', [EntityController::class, 'edit'])->name('entity.edit');
+    Route::post('entity/update', [EntityController::class, 'update'])->name('entity.update');
+    Route::delete('entity/{id}/delete', [EntityController::class, 'destroy'])->name('entity.destroy');
+
+
+    Route::get('{custom_post_type_slug}/index', [StoreController::class, 'index'])->name('store.index');
+    Route::get('{custom_post_type_slug}/add', [StoreController::class, 'create'])->name('store.create');
+    Route::post('{custom_post_type_slug}/store', [StoreController::class, 'store'])->name('store.store');
+    Route::get('{custom_post_type_slug}/edit/{key}', [StoreController::class, 'edit'])->name('store.edit');
+    Route::post('{custom_post_type_slug}/update/{key}', [StoreController::class, 'update'])->name('store.update');
+    Route::get('{custom_post_type_slug}/delete/{key}', [StoreController::class, 'delete'])->name('store.delete');
+    Route::get('home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+});
+
+
 
 
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_ad min');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -6,8 +6,8 @@
     <nav
         class="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
         <div class="container flex items-center justify-between py-0 flex-wrap-inherit">
-            <a class="py-2.375 text-sm mr-4 ml-4 whitespace-nowrap font-bold text-white lg:ml-0"
-                href="../pages/dashboard.html"> Cube Tube Dashboard </a>
+            <a class="py-2.375 text-sm mr-4 ml-4 whitespace-nowrap font-bold text-white lg:ml-0" href="{{'/'}}"> Cube
+                Tube Dashboard </a>
             <button navbar-trigger
                 class="px-3 py-1 ml-2 leading-none transition-all bg-transparent border border-transparent border-solid rounded-lg shadow-none cursor-pointer text-lg ease-soft-in-out lg:hidden"
                 type="button" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,14 +39,14 @@
                     </li>
                     <li>
                         <a class="block px-4 py-2 mr-2 font-normal text-white transition-all duration-250 lg-max:opacity-0 lg-max:text-slate-700 ease-soft-in-out text-sm lg:px-2 lg:hover:text-white/75"
-                            href="{{route('frontend.sing_up')}}">
+                            href="{{route('frontend.sign_up')}}">
                             <i class="mr-1 text-white lg-max:text-slate-700 fas fa-user-circle opacity-60"></i>
                             Sign Up
                         </a>
                     </li>
                     <li>
                         <a class="block px-4 py-2 mr-2 font-normal text-white transition-all duration-250 lg-max:opacity-0 lg-max:text-slate-700 ease-soft-in-out text-sm lg:px-2 lg:hover:text-white/75"
-                            href="{{route('frontend.sing_in')}}">
+                            href="{{route('frontend.sign_in')}}">
                             <i class="mr-1 text-white lg-max:text-slate-700 fas fa-key opacity-60"></i>
                             Sign In
                         </a>
@@ -164,22 +164,48 @@
                                 </div>
                             </div>
                             <div class="flex-auto p-6">
-                                <form role="form text-left">
+                                <form method="POST" action="{{ route('register') }}" role="form text-left">
+                                    @csrf
                                     <div class="mb-4">
-                                        <input type="text"
+                                        <input type="text" id="name" name="name" value="{{ old('name') }}" required
+                                            autocomplete="name" autofocus
                                             class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
                                             placeholder="Name" aria-label="Name" aria-describedby="email-addon" />
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="mb-4">
-                                        <input type="email"
+                                        <input type="email" id="email"
                                             class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
-                                            placeholder="Email" aria-label="Email" aria-describedby="email-addon" />
+                                            placeholder="Email" aria-label="Email" aria-describedby="email-addon"
+                                            name="email" value="{{ old('email') }}" required autocomplete="email" />
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="mb-4">
                                         <input type="password"
                                             class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
                                             placeholder="Password" aria-label="Password"
-                                            aria-describedby="password-addon" />
+                                            aria-describedby="password-addon" name="password" required
+                                            autocomplete="new-password" />
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-4">
+                                        <input type="password"
+                                            class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+                                            placeholder="Password" aria-label="Password"
+                                            aria-describedby="password-addon" name="password_confirmation" required
+                                            autocomplete="new-password" />
                                     </div>
                                     <div class="min-h-6 pl-6.92 mb-0.5 block">
                                         <input id="terms"
@@ -191,7 +217,7 @@
                                                 class="font-bold text-slate-700">Terms and Conditions</a> </label>
                                     </div>
                                     <div class="text-center">
-                                        <button type="button"
+                                        <button type="submit"
                                             class="inline-block w-full px-6 py-3 mt-6 mb-2 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-gray-900 to-slate-800 hover:border-slate-700 hover:bg-slate-700 hover:text-white">Sign
                                             up</button>
                                     </div>
