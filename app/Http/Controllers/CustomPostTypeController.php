@@ -13,10 +13,10 @@ class CustomPostTypeController extends Controller
         $this->cpt = $cpt;
         $this->entity = $entity;
     }
-    
+
     function index() {
-        $data = $this->cpt->list(); 
-       
+        $data = $this->cpt->list();
+
         return view('dashboard.cpt.index',compact('data'));
     }
 
@@ -48,7 +48,7 @@ class CustomPostTypeController extends Controller
             'name' => 'required',
             'slug' => 'required',
         ]);
-        
+
         $this->cpt->storeOrUpdate($id,$data);
         return redirect()->route('customPostType.index') ->with([
             'message' => "Custom Post Updated Successfully",
@@ -57,11 +57,11 @@ class CustomPostTypeController extends Controller
     }
 
     public function destroy($id)
-    {   
+    {
         $this->cpt->destroyById($id);
 
         return redirect()->route('customPostType.index')->with([
-            'message' => 'Custom Post Type deleted successfully!', 
+            'message' => 'Custom Post Type deleted successfully!',
             'status' => 'success'
         ]);
     }
@@ -71,11 +71,11 @@ class CustomPostTypeController extends Controller
 
         $entity = $this->entity->findWhere(['custom_post_type_id'=>$cpt->id])->get();
        return view('dashboard.entity.index',compact('cpt','entity','id'));
-        
-        
-    }
-    
 
-    
+
+    }
+
+
+
 
 }

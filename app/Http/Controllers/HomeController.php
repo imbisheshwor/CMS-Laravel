@@ -4,15 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class HomeController extends Controller
 {
-    function sign_in(){
 
-        return view('frontend.sign-in');
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 
-    function sign_up(){
-
-        return view('frontend.sign-up');
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function adminHome()
+    {
+        return view('adminHome');
+    }
+
+
 }

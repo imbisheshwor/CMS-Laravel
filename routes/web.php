@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomPostTypeController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StoreController;
 use App\Models\Entity;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,8 @@ Route::get('/', function () {
     return view('dashboard/index');
 });
 Route::prefix('front')->group(function (){
-    Route::get('sign-in',[HomeController::class,'sign_in'])->name('frontend.sing_in');
-    Route::get('sign-up',[HomeController::class,'sign_up'])->name('frontend.sing_up');
+    Route::get('sign-in',[LoginController::class,'sign_in'])->name('frontend.sing_in');
+    Route::get('sign-up',[LoginController::class,'sign_up'])->name('frontend.sing_up');
 });
 
 
@@ -52,4 +53,7 @@ Route::get('admin/{custom_post_type_slug}/add', [StoreController::class, 'create
 Route::post('admin/{custom_post_type_slug}/store', [StoreController::class, 'store'])->name('store.store');
 Route::get('admin/{custom_post_type_slug}/edit/{key}', [StoreController::class,'edit'])->name('store.edit');
 Route::post('admin/{custom_post_type_slug}/update/{key}', [StoreController::class,'update'])->name('store.update');
-Route::get('admin/{custom_post_type_slug}/delete/{key}', [StoreController::class,'delete'])->name('store.delete');
+Route::get('admin/{custom_post_type_slug}/delete/{key}', [StoreController::class,'delete'])->name('store.delete');Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+
+
+Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_ad min');
