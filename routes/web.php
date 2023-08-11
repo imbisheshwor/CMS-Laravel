@@ -8,6 +8,7 @@ use App\Http\Controllers\StoreController;
 use App\Models\Entity;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,11 @@ Route::get('/', function () {
 Route::prefix('front')->group(function () {
     Route::get('sign-in', [LoginController::class, 'sign_in'])->name('frontend.sign_in');
     Route::get('sign-up', [LoginController::class, 'sign_up'])->name('frontend.sign_up');
+});
+
+Route::prefix('google')->name('google.')->group(function () {
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
 });
 
 

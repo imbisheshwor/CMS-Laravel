@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Socialite\SocialiteServiceProvider;
+
+
 
 class User extends Authenticatable
 {
@@ -22,6 +25,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'facebook_id',
+        'google_id',
     ];
 
     /**

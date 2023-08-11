@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Request;
-use socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class GoogleController extends Controller
 {
@@ -16,6 +19,7 @@ class GoogleController extends Controller
     {
         try {
             $user = Socialite::driver('google')->user();
+
 
             // Check Users Email If Already There
             $is_user = User::where('email', $user->getEmail())->first();
@@ -38,7 +42,7 @@ class GoogleController extends Controller
 
             Auth::loginUsingId($saveUser->id);
 
-            return redirect()->route('home');
+            return redirect()->route('dashboard');
         } catch (\Throwable $th) {
             throw $th;
         }

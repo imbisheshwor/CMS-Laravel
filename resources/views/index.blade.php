@@ -97,7 +97,7 @@
                                 <div class="flex-auto p-6">
 
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="w-full max-w-full px-3 lg:flex-0 shrink-0 md:w-6/12">

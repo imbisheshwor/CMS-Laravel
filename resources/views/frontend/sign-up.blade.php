@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="w-3/12 max-w-full px-1 mr-auto flex-0">
                                     <a class="inline-block w-full px-6 py-3 mb-4 font-bold text-center text-gray-200 uppercase align-middle transition-all bg-transparent border border-gray-200 border-solid rounded-lg shadow-none cursor-pointer hover:scale-102 leading-pro text-xs ease-soft-in tracking-tight-soft bg-150 bg-x-25 hover:bg-transparent hover:opacity-75"
-                                        href="">
+                                        href="{{route('google.login')}}">
                                         <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1"
                                             xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -222,7 +222,8 @@
                                             up</button>
                                     </div>
                                     <p class="mt-4 mb-0 leading-normal text-sm">Already have an account? <a
-                                            href="../pages/sign-in.html" class="font-bold text-slate-700">Sign in</a>
+                                            href="{{route('frontend.sign_in')}}" class="font-bold text-slate-700">Sign
+                                            in</a>
                                     </p>
                                 </form>
                             </div>
